@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CrudAspNetMVC.Models.Produto>
+
+@{
+	ViewData["Title"] = "Lista de Produtos";
+	Layout = null;
+}
+
+
+<head>
+	<link rel="stylesheet" href="~/assets/css/estilo-btn-table.css" />
+	<meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">@ViewData["Title"]</h4>
+						</div>
+						<div class="body-content">
+							<div class="row">
+								<div class="col-lg-1">
+									<a asp-action="Index" class="btn btn-primary btn btn-info btn-fill pull-left navbar-btn">
+										<span class="glyphicon glyphicon-home">Home</span>
+									</a>
+								</div>
+								<div class="col-lg-1">
+									<a asp-action="Create" class="btn btn-primary btn btn-info btn-fill pull-right navbar-btn">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true">Criar Novo produto</span>
+									</a>
+								</div>
+								<div class="col-lg-5">
+									<div class="input-group navbar-btn">
+										<input type="text" class="form-control" placeholder="Procurar...">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button">Go!</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="content table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>
+											<b>@Html.DisplayNameFor(model => model.ProdutoId)</b>
+										</th>
+										<th>
+											<b>@Html.DisplayNameFor(model => model.ProdutoNome)</b>
+										</th>
+										<th>
+											<b>@Html.DisplayNameFor(model => model.ProdutoDescricao)</b>
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td width="100">
+												@Html.DisplayFor(modelItem => item.ProdutoId)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ProdutoNome)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ProdutoDescricao)
+											</td>
+											<td>
+												<a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning">
+													<span class="glyphicon glyphicon-edit">Alterar</span>
+												</a>
+												<a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info">
+													<span class="glyphicon glyphicon-eye-open">Details</span>
+												</a>
+												<a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger">
+													<span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+												</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@section Scripts {
+		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	}
+</body>
+

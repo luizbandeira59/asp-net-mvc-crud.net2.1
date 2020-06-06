@@ -1,0 +1,46 @@
+﻿@model CrudAspNetMVC.Models.Produto
+
+@{
+	ViewData["Title"] = "Detalhes";
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+	<title>@ViewData["Title"]</title>
+</head>
+<body>
+
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProdutoId)
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.ProdutoId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProdutoNome)
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.ProdutoNome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProdutoDescricao)
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.ProdutoDescricao)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProdutoId }) |
+    <a asp-action="Index">Voltar</a>
+</div>
+</body>
+</html>
