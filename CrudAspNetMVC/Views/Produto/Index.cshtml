@@ -2,34 +2,51 @@
 
 @{
 	ViewData["Title"] = "Lista de Produtos";
-	Layout = null;
+	Layout = "_LayoutIES";
 }
 
 
-<head>
-	<link rel="stylesheet" href="~/assets/css/estilo-btn-table.css" />
-	<meta name="viewport" content="width=device-width" />
+	@section Styles	{
+		<environment include="Development">
+			<link rel="stylesheet" href="~/lib/datatable/js/datatable.jquery.min.js" />
+		</environment>
+		<environment exclude="Development">
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		</environment>
+	}
 
-</head>
+	@if (@TempData["Message"] != null)
+	{
+		<div class="alert alert-success" role="alert">
+			@TempData["Message"]
+		</div>
+	}
+	@if (@TempData["Message"] == null)
+	{
+		
+	}
+	<link rel="stylesheet" href="~/assets/css/estilo-btn-table.css" />
+
 <body>
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card">
+						<hr />
 						<div class="header">
 							<h4 class="title">@ViewData["Title"]</h4>
 						</div>
-						<div class="body-content">
+						<div class="content">
 							<div class="row">
 								<div class="col-lg-1">
 									<a asp-action="Index" class="btn btn-primary btn btn-info btn-fill pull-left navbar-btn">
-										<span class="glyphicon glyphicon-home">Home</span>
+										<span class="glyphicon glyphicon-home"></span>
 									</a>
 								</div>
 								<div class="col-lg-1">
 									<a asp-action="Create" class="btn btn-primary btn btn-info btn-fill pull-right navbar-btn">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true">Criar Novo produto</span>
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 									</a>
 								</div>
 								<div class="col-lg-5">
@@ -74,13 +91,13 @@
 											</td>
 											<td>
 												<a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning">
-													<span class="glyphicon glyphicon-edit">Alterar</span>
+													<span class="glyphicon glyphicon-edit"></span>
 												</a>
 												<a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info">
-													<span class="glyphicon glyphicon-eye-open">Details</span>
+													<span class="glyphicon glyphicon-eye-open"></span>
 												</a>
 												<a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger">
-													<span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 												</a>
 											</td>
 										</tr>
@@ -93,8 +110,10 @@
 			</div>
 		</div>
 	</div>
-	@section Scripts {
-		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-	}
 </body>
 
+@section Scripts {
+
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

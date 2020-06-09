@@ -1,55 +1,49 @@
 ﻿@model CrudAspNetMVC.Models.Produto
 
 @{
-	ViewData["Title"] = "Editar Produto";
-	Layout = null;
+	ViewData["Title"] = "Alterar Produto";
+	Layout = "~/Views/Shared/_LayoutIES.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-	<meta name="viewport" content="width=device-width" />
-	<title>@ViewData["Title"]</title>
-</head>
-<body>
-
-	<form asp-action="Edit">
-		<div class="form-horizontal">
-			<h4>Produto</h4>
-			<hr />
-
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="ProdutoId" />
-			<div class="form-group">
-				<label asp-for="ProdutoNome" class="col-md-2 control-label"></label>
-				<div class="col-md-10">
-					<input asp-for="ProdutoNome" class="form-control" />
-					<span asp-validation-for="ProdutoNome" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="form-group">
-				<label asp-for="ProdutoDescricao" class="col-md-2 control-label"></label>
-				<div class="col-md-10">
-					<input asp-for="ProdutoDescricao" class="form-control" />
-					<span asp-validation-for="ProdutoDescricao" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-offset-2 col-md-10">
-					<input type="submit" value="Save" class="btn btn-primary" />
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9 centro">
+				<div class="card">
+					<hr />
+					<div class="header">
+						<h4 class="title">@ViewData["Title"]</h4>
+						<br />
+					</div>
+					<div class="content">
+						<div class="row">
+							<div class="form-group col-md-12">
+								<form asp-action="Edit">
+									<input type="hidden" asp-for="ProdutoId" />
+									<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+									<div class="form-group">
+										<label asp-for="ProdutoNome" class="control-label"></label>
+										<input asp-for="ProdutoNome" class="form-control" />
+										<span asp-validation-for="ProdutoNome" class="text-danger"></span>
+									</div>
+									<div class="form-group">
+										<label asp-for="ProdutoDescricao" class="control-label"></label>
+										<input asp-for="ProdutoDescricao" class="form-control" />
+										<span asp-validation-for="ProdutoDescricao" class="text-danger"></span>
+									</div>
+									<div class="form-group text-center h3">
+										<input type="submit" value="Atualizar Produto" class="btn btn-info btn-fill col-lg-6" />
+										<a asp-action="Index" class="btn btn-fill pull-right col-lg-6">Retornar à listagem de produtos</a>										
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</form>
-
-
-	<div>
-		<a asp-action="Index">Voltar</a>
 	</div>
-
-	@section Scripts {
-		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-	}
-</body>
-</html>
+</div>
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,51 +1,77 @@
 ﻿@model CrudAspNetMVC.Models.Produto
 
 @{
-	ViewData["Title"] = "Deletar";
-	Layout = null;
+	ViewData["Title"] = "Tem certeza que deseja deletar este produto?";
+	Layout = "~/Views/Shared/_LayoutIES.cshtml";
 }
 
-<!DOCTYPE html>
+@section Styles {
+	<environment include="Development">
+		<link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			  asp-fallback-href="~/lib/font-awesome/css/all.css"
+			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+	</environment>
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-	<title>@ViewData["Title"]</title>
-</head>
-<body>
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9 centro">
+				<div class="card delete-texto">
+					<hr />
+					<div class="header">
+						<h4 class="title text-danger">@ViewData["Title"]</h4>
+					</div>
+					<div class="content">
+						<div class="row">
+							<div class="form-group col-md-12">
+								<br />
+								<label asp-for="ProdutoId" class="control-label hidden"></label>
+								<br />
+								<div class="input-group col-md-12">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="fa fa-key" aria-hidden="true"></i>
+										</span>
+									</div>
+									<input asp-for="ProdutoId" class="form-control" disabled="disabled" />
+								</div>
 
-<h3>Você realmente deseja deletar isto?</h3>
-<div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProdutoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProdutoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProdutoNome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProdutoNome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ProdutoDescricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProdutoDescricao)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-		<div class="form-actions no-color">
-			<input type="hidden" asp-for="ProdutoId" />
-			<input type="submit" value="Delete" class="btn btn-danger" /> |
+								<label asp-for="ProdutoNome" class="control-label hidden"></label>
+								<br />
+								<div class="input-group col-md-12">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="fa fa-user-circle" aria-hidden="true"></i>
+										</span>
+									</div>
+									<input asp-for="ProdutoDescricao" class="form-control" disabled="disabled" />
+								</div>
+								<label asp-for="ProdutoDescricao" class="control-label hidden"></label>
+								<br />
+								<div class="input-group col-md-12">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="fa fa-edit" aria-hidden="true"></i>
+										</span>
+									</div>
+									<input asp-for="ProdutoDescricao" class="form-control" disabled="disabled" />
+								</div>
+								<div class="form-group text-left h3">
+									<form asp-action="Delete">
+										<input type="hidden" asp-for="ProdutoId" />
+										<input type="submit" value="Remover Produto" class="btn btn-danger btn-fill col-lg-6" />
+										<a asp-action="Index" class="btn btn-info btn-fill pull-right col-lg-6">Retornar à listagem de produtos</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-        <a asp-action="Index">Voltar</a>
-    </form>
+	</div>
 </div>
-</body>
-</html>
