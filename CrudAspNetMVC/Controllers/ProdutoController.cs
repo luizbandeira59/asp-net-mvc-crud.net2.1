@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CrudAspNetMVC.Data;
 using CrudAspNetMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrudAspNetMVC.Controllers
@@ -19,18 +20,22 @@ namespace CrudAspNetMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Produtos.OrderBy(c => c.ProdutoNome).ToListAsync());
+            return View(await _context.Produtos.Include(c => c.Categoria).OrderBy(p => p.ProdutoNome).ToListAsync());
         }
 
-
+        //GET PRODUTO/CREATE
         public IActionResult Create()
         {
+            var categorias = _context.Categorias.OrderBy(c => c.CatNome).ToList();
+            categorias.Insert(0, new Categoria() { CategoriaId = 0, CatNome = "Selecione a Categoria" });
+            ViewBag.Categorias = categorias;
             return View();
         }
 
+        //POST: PRODUTO/CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoId,ProdutoNome,ProdutoDescricao")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ProdutoId,ProdutoNome,ProdutoDescricao,CategoriaId")] Produto produto)
         {
             try
             {
@@ -48,7 +53,7 @@ namespace CrudAspNetMVC.Controllers
             return View(produto);
         }
 
-        // GET: Instituicao/Edit/5
+        // GET: PRODUTO/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -56,18 +61,21 @@ namespace CrudAspNetMVC.Controllers
                 return NotFound();
             }
             
-            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId ==id);
+            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
             }
+            ViewBag.Categorias = new SelectList(_context.Categorias.OrderBy(c => c.CatNome), "CategoriaId", "CatNome", produto.CategoriaId);
+
             return View(produto);
         }
 
 
+        //POST : PRODUTO/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("ProdutoId,ProdutoNome,ProdutoDescricao")] Produto produto)
+        public async Task<IActionResult> Edit(long? id, [Bind("ProdutoId,ProdutoNome,ProdutoDescricao,CategoriaId")] Produto produto)
         {
             if (id != produto.ProdutoId)
             {
@@ -94,10 +102,11 @@ namespace CrudAspNetMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Categorias = new SelectList(_context.Categorias.OrderBy(c => c.CatNome), "CategoriaId", "CatNome", produto.CategoriaId);
             return View(produto);
         }
 
-        // GET: Instituicao/Details/5
+        // GET: PRODUTO/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -105,8 +114,8 @@ namespace CrudAspNetMVC.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.ProdutoId == id);
+            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
+            _context.Categorias.Where(i => produto.CategoriaId == i.CategoriaId).Load();
             if (produto == null)
             {
                 return NotFound();
@@ -115,7 +124,7 @@ namespace CrudAspNetMVC.Controllers
             return View(produto);
         }
 
-        // GET: Instituicao/Delete/5
+        // GET: PRODUTO/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -123,8 +132,8 @@ namespace CrudAspNetMVC.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.ProdutoId == id);
+            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
+            _context.Categorias.Where(p => produto.CategoriaId == p.CategoriaId).Load();
             if (produto == null)
             {
                 return NotFound();
@@ -134,15 +143,15 @@ namespace CrudAspNetMVC.Controllers
         }
 
 
-        // POST: Instituicao/Delete/5
+        // POST: PRODUTO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
             var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
             _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
             TempData["Message"] = "Produto " + produto.ProdutoNome.ToUpper() + " foi removido com sucesso!";
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

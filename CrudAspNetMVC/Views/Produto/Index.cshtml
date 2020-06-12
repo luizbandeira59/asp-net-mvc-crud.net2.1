@@ -5,27 +5,20 @@
 	Layout = "_LayoutIES";
 }
 
+<link rel="stylesheet" href="~/assets/css/estilo-botão-tabela.css" />
 
-	@section Styles	{
-		<environment include="Development">
-			<link rel="stylesheet" href="~/lib/datatable/js/datatable.jquery.min.js" />
-		</environment>
-		<environment exclude="Development">
-			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-		</environment>
-	}
 
-	@if (@TempData["Message"] != null)
-	{
-		<div class="alert alert-success" role="alert">
-			@TempData["Message"]
-		</div>
-	}
-	@if (@TempData["Message"] == null)
-	{
-		
-	}
-	<link rel="stylesheet" href="~/assets/css/estilo-btn-table.css" />
+
+@if (@TempData["Message"] != null)
+{
+	<div class="alert alert-success" role="alert">
+		@TempData["Message"]
+	</div>
+}
+@if (@TempData["Message"] == null)
+{
+
+}
 
 <body>
 	<div class="content">
@@ -60,8 +53,8 @@
 							</div>
 						</div>
 
-						<div class="content table-responsive">
-							<table class="table">
+						<div class="content">
+							<table class="table-responsive">
 								<thead>
 									<tr>
 										<th>
@@ -73,6 +66,9 @@
 										<th>
 											<b>@Html.DisplayNameFor(model => model.ProdutoDescricao)</b>
 										</th>
+										<th>
+											<b>@Html.DisplayNameFor(model => model.Categoria.CatNome)</b>
+										</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -80,29 +76,35 @@
 									@foreach (var item in Model)
 									{
 										<tr>
-											<td width="100">
+											<td style="padding:10px">
 												@Html.DisplayFor(modelItem => item.ProdutoId)
 											</td>
-											<td>
+											<td style="padding:2px">
 												@Html.DisplayFor(modelItem => item.ProdutoNome)
 											</td>
-											<td>
+											<td style="padding:5px">
 												@Html.DisplayFor(modelItem => item.ProdutoDescricao)
 											</td>
+											<td style="padding-left:8px">
+												@Html.DisplayFor(modelItem => item.Categoria.CatNome)
+											</td>
 											<td>
-												<a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning">
+												<a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning pull-right">
 													<span class="glyphicon glyphicon-edit"></span>
 												</a>
-												<a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info">
+												<a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info pull-right">
 													<span class="glyphicon glyphicon-eye-open"></span>
 												</a>
-												<a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger">
+												<a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger pull-right">
 													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 												</a>
 											</td>
 										</tr>
+
+
 									}
 								</tbody>
+
 							</table>
 						</div>
 					</div>
@@ -112,8 +114,21 @@
 	</div>
 </body>
 
-@section Scripts {
+@section ScriptPage {
+	<environment include="Development">
+		<script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+				asp-fallback-src="~/lib/datatables/js/jquery.dataTables.min.js">
+		</script>
+	</environment>
 
-	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabela_produtos').DataTable({
+                "order": [[1, "asc"]]
+            });
+        });
+	</script>
 }

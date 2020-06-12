@@ -1,71 +1,103 @@
 ﻿@model CrudAspNetMVC.Models.Produto
 
 @{
-	ViewData["Title"] = "Tem certeza que deseja deletar este produto?";
+	ViewData["Title"] = "Deletar Produto!!";
 	Layout = "~/Views/Shared/_LayoutIES.cshtml";
 }
 
-@section Styles {
-	<environment include="Development">
-		<link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
-	</environment>
-	<environment exclude="Development">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-			  asp-fallback-href="~/lib/font-awesome/css/all.css"
-			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-	</environment>
-}
+<style>
+	.modal-backdrop {
+		z-index: 1;
+	}
+</style>
 
-<div class="content">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-9 centro">
-				<div class="card delete-texto">
-					<hr />
-					<div class="header">
-						<h4 class="title text-danger">@ViewData["Title"]</h4>
-					</div>
-					<div class="content">
-						<div class="row">
-							<div class="form-group col-md-12">
-								<br />
-								<label asp-for="ProdutoId" class="control-label hidden"></label>
-								<br />
-								<div class="input-group col-md-12">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="fa fa-key" aria-hidden="true"></i>
-										</span>
-									</div>
-									<input asp-for="ProdutoId" class="form-control" disabled="disabled" />
-								</div>
+<body>
 
-								<label asp-for="ProdutoNome" class="control-label hidden"></label>
-								<br />
-								<div class="input-group col-md-12">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="fa fa-user-circle" aria-hidden="true"></i>
-										</span>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-9 centro">
+					<div class="card delete-texto">
+						<hr />
+						<div class="header">
+							<h4 class="title text-danger">@ViewData["Title"]</h4>
+						</div>
+						<div class="content">
+							<div class="row">
+								<div class="form-group col-md-12">
+									<br />
+									<label asp-for="ProdutoId" class="control-label hidden"></label>
+									<br />
+									<div class="input-group col-md-12">
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="fa fa-key" aria-hidden="true"></i>
+											</span>
+										</div>
+										<input asp-for="ProdutoId" class="form-control" disabled="disabled" />
 									</div>
-									<input asp-for="ProdutoDescricao" class="form-control" disabled="disabled" />
-								</div>
-								<label asp-for="ProdutoDescricao" class="control-label hidden"></label>
-								<br />
-								<div class="input-group col-md-12">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="fa fa-edit" aria-hidden="true"></i>
-										</span>
+
+									<label asp-for="ProdutoNome" class="control-label hidden"></label>
+									<br />
+									<div class="input-group col-md-12">
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="fa fa-user-circle" aria-hidden="true"></i>
+											</span>
+										</div>
+										<input asp-for="ProdutoNome" class="form-control" disabled="disabled" />
 									</div>
-									<input asp-for="ProdutoDescricao" class="form-control" disabled="disabled" />
+
+									<label asp-for="ProdutoDescricao" class="control-label hidden"></label>
+									<br />
+									<div class="input-group col-md-12">
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="fa fa-edit" aria-hidden="true"></i>
+											</span>
+										</div>
+										<input asp-for="ProdutoDescricao" class="form-control" disabled="disabled" />
+									</div>
+
+									<label asp-for="Categoria.CatNome" class="control-label hidden"></label>
+									<br />
+									<div class="input-group col-md-12">
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="fa fa-user-circle" aria-hidden="true"></i>
+											</span>
+										</div>
+										<input asp-for="Categoria.CatNome" class="form-control" disabled="disabled" />
+									</div>
+
+									<div class="form-group text-left h3">
+										<button type="button" data-toggle="modal" data-target="#modalConfirmationDelete" class="btn btn-danger btn-fill btn-block">
+											Remover
+										</button>
+										<a asp-action="Index" class="btn btn-info btn-fill btn-block">Voltar</a>
+									</div>
 								</div>
-								<div class="form-group text-left h3">
-									<form asp-action="Delete">
-										<input type="hidden" asp-for="ProdutoId" />
-										<input type="submit" value="Remover Produto" class="btn btn-danger btn-fill col-lg-6" />
-										<a asp-action="Index" class="btn btn-info btn-fill pull-right col-lg-6">Retornar à listagem de produtos</a>
-									</form>
+								<div class="modal fade" id="modalConfirmationDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="deleteModal">Remoção de Produtos</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<p>Confirma a exclusão do Produto @Model.ProdutoNome.ToUpper() ??</p>
+											</div>
+											<div class="modal-footer">
+												<form asp-action="Delete">
+													<input type="hidden" asp-for="ProdutoId" />
+													<input type="submit" value="Remover Produto" class="btn btn-danger btn-fill" />
+													<button type="button" class="btn btn-info btn-fill" data-dismiss="modal">Fechar</button>
+												</form>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -74,4 +106,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</body>
