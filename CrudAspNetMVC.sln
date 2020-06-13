@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1145
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAspNetMVC", "CrudAspNetMVC\CrudAspNetMVC.csproj", "{C3A705F5-AF3F-4CF2-A8BA-B5CB061F02B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudAspNetMVC", "CrudAspNetMVC\CrudAspNetMVC.csproj", "{C3A705F5-AF3F-4CF2-A8BA-B5CB061F02B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2} = {DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{C3A705F5-AF3F-4CF2-A8BA-B5CB061F02B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3A705F5-AF3F-4CF2-A8BA-B5CB061F02B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3A705F5-AF3F-4CF2-A8BA-B5CB061F02B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF3769E-440F-4D59-83D5-E79E2D4B9AF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

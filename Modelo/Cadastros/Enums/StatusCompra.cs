@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrudAspNetMVC.Models.Enums
+namespace Modelo.Cadastros.Enums
 {
 
     public enum StatusCompra : int

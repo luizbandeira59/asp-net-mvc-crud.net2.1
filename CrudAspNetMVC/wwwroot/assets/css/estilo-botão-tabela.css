@@ -61,9 +61,9 @@ td, th {
 }
 
 .card .table tbody td:last-child, .card .table thead th:last-child {
-	 padding-right: 0px;
+	padding-right: 5px;
 }
 
 .card .table tbody td:first-child, .card .table thead th:first-child {
-	padding-left: 0px;
+	padding-left: 5px;
 }

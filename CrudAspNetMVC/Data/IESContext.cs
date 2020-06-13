@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CrudAspNetMVC.Models;
-using CrudAspNetMVC.Models.Enums;
+using Modelo.Cadastros;
+using Modelo.Cadastros.Enums;
 
 namespace CrudAspNetMVC.Data
 {

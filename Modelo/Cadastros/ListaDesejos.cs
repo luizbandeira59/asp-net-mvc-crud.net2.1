@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using CrudAspNetMVC.Models.Enums;
+using Modelo.Cadastros.Enums;
 
-namespace CrudAspNetMVC.Models
+namespace Modelo.Cadastros
 {
     public class ListaDesejos
     {
         
         [Key]
         public long? DesejoId { get; set; }
+
         [Display(Name = "Valor Do Produto")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
-
         public double DesejoValor { get; set; }
 
         [Display(Name = "Previsão de Compra")]
@@ -25,6 +25,7 @@ namespace CrudAspNetMVC.Models
         [Display(Name = "Situação da Compra")]
         public StatusCompra Status { get; set; }
 
+        [Display(Name = "Produto")]
         public Produto Produto { get; set; }
         public long? ProdutoId { get; set; }
 

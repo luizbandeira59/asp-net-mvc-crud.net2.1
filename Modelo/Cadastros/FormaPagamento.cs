@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrudAspNetMVC.Models
+namespace Modelo.Cadastros
 {
     public class FormaPagamento
     {
@@ -25,7 +25,8 @@ namespace CrudAspNetMVC.Models
         */
 
         public virtual ICollection<Mercado> Mercados { get; set; }
-        public virtual ICollection<ListaDesejos> ListaDesejos { get; set; }       
+        public virtual ICollection<ListaDesejos> ListaDesejos { get; set; }
+        public virtual ICollection<DespesaDir> DespesasDiretas { get; set; }
 
     }
 }

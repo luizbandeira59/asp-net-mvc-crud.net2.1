@@ -1,48 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CrudAspNetMVC.Data;
-using CrudAspNetMVC.Models;
+﻿using CrudAspNetMVC.Data;
+using CrudAspNetMVC.Data.DAL.Cadastros;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Modelo.Cadastros;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace CrudAspNetMVC.Controllers
 {
     public class ProdutoController : Controller
     {
         private readonly IESContext _context;
+        private readonly ProdutoDAL produtoDAL;
+        private readonly CategoriaDAL categoriaDAL;
+
         public ProdutoController(IESContext context)
         {
-            this._context = context;
+            _context = context;
+            categoriaDAL = new CategoriaDAL(context);
+            produtoDAL = new ProdutoDAL(context);           
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Produtos.Include(c => c.Categoria).OrderBy(p => p.ProdutoNome).ToListAsync());
+            return View(await produtoDAL.PegarProdutoPorNome().ToListAsync());
         }
 
-        //GET PRODUTO/CREATE
+        //GET Produto/Create
         public IActionResult Create()
         {
-            var categorias = _context.Categorias.OrderBy(c => c.CatNome).ToList();
+            var categorias = categoriaDAL.PegarCategoriasPorNome().ToList();
             categorias.Insert(0, new Categoria() { CategoriaId = 0, CatNome = "Selecione a Categoria" });
             ViewBag.Categorias = categorias;
             return View();
         }
 
-        //POST: PRODUTO/CREATE
+        //POST: Produto/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoId,ProdutoNome,ProdutoDescricao,CategoriaId")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ProdutoNome,ProdutoDescricao, CategoriaId")] Produto produto)     
+
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(produto);
-                    await _context.SaveChangesAsync();
+                    await produtoDAL.CriarProduto(produto);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -53,29 +58,17 @@ namespace CrudAspNetMVC.Controllers
             return View(produto);
         }
 
-        // GET: PRODUTO/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            
-            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
-            ViewBag.Categorias = new SelectList(_context.Categorias.OrderBy(c => c.CatNome), "CategoriaId", "CatNome", produto.CategoriaId);
-
-            return View(produto);
+            ViewResult viewProduto = (ViewResult)await PegarViewProdutoPorId(id);
+            Produto produto = (Produto)viewProduto.Model;
+            ViewBag.Categorias = new SelectList(categoriaDAL.PegarCategoriasPorNome(), "CategoriaId", "CatNome", produto.CategoriaId);
+            return viewProduto;
         }
 
-
-        //POST : PRODUTO/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("ProdutoId,ProdutoNome,ProdutoDescricao,CategoriaId")] Produto produto)
+        public async Task<IActionResult> Edit(long? id, [Bind("ProdutoId, ProdutoNome, ProdutoDescricao, CategoriaId")] Produto produto)
         {
             if (id != produto.ProdutoId)
             {
@@ -86,12 +79,11 @@ namespace CrudAspNetMVC.Controllers
             {
                 try
                 {
-                    _context.Update(produto);
-                    await _context.SaveChangesAsync();
+                    await produtoDAL.CriarProduto(produto);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.ProdutoId))
+                    if (!await DepartamentoExists(produto.ProdutoId))
                     {
                         return NotFound();
                     }
@@ -102,62 +94,49 @@ namespace CrudAspNetMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Categorias = new SelectList(_context.Categorias.OrderBy(c => c.CatNome), "CategoriaId", "CatNome", produto.CategoriaId);
+            ViewBag.Categorias = new SelectList(categoriaDAL.PegarCategoriasPorNome(), "CategoriaId", "CatNome", produto.CategoriaId);
             return View(produto);
         }
 
-        // GET: PRODUTO/Details/5
+        private async Task<bool> DepartamentoExists(long? id)
+        {
+            return await produtoDAL.PegarProdutoPorId((long)id) != null;
+        }
+
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
-            _context.Categorias.Where(i => produto.CategoriaId == i.CategoriaId).Load();
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
-            return View(produto);
+            return await PegarViewProdutoPorId(id);
         }
 
-        // GET: PRODUTO/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
-            _context.Categorias.Where(p => produto.CategoriaId == p.CategoriaId).Load();
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
-            return View(produto);
+            return await PegarViewProdutoPorId(id);
         }
 
-
-        // POST: PRODUTO/Delete/5
+        // POST: Instituicao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
-            var produto = await _context.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
-            _context.Produtos.Remove(produto);
+            var produto = await produtoDAL.DeletarProdutoPorId((long)id);
             TempData["Message"] = "Produto " + produto.ProdutoNome.ToUpper() + " foi removido com sucesso!";
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProdutoExists(long? id)
-        { 
-            return _context.Produtos.Any(e => e.ProdutoId == id);
+        private async Task<IActionResult> PegarViewProdutoPorId(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var produto = await produtoDAL.PegarProdutoPorId((long)id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+
+            return View(produto);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CrudAspNetMVC.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CrudAspNetMVC.Models.Enums;
+using Modelo.Cadastros.Enums;
 
 namespace CrudAspNetMVC.Controllers
 {
