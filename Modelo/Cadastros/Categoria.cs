@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modelo.Listas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,10 +15,11 @@ namespace Modelo.Cadastros
         [Display(Name = "Categoria")]
         public string CatNome { get; set; }
     
-        public virtual ICollection<Mercado> Mercados { get; set; }
-        public virtual ICollection<ListaDesejos> ListaDesejos { get; set; }
+        public virtual ICollection<ListaMercado> Mercados { get; set; }
+        public virtual ICollection<ListaDesejo> ListaDesejos { get; set; }
         public virtual ICollection<Produto> Produtos { get; set; }
-        public virtual ICollection<DespesaDir> DespesasDiretas { get; set; }
+        public virtual ICollection<DespesaDir> DespesaDiretas { get; set; }
+        public virtual ICollection<DespesaFixa> DespesasFixas { get; set; }
 
     }
 }

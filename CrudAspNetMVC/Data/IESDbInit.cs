@@ -12,12 +12,12 @@ namespace CrudAspNetMVC.Data
     {
         public static void Initialize(IESContext context)
         {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            //context.Database.EnsureDeleted();
+           // context.Database.EnsureCreated();
 
             if (context.Categorias.Any() || context.Produtos.Any() || context.Formas.Any() || context.Desejos.Any())
             {
-                return;
+                return;//ja possui dados
             }
 
             var categorias = new Categoria[]
@@ -69,6 +69,7 @@ namespace CrudAspNetMVC.Data
             }
             context.SaveChanges();
 
+            /*
             var produtos = new Produto[]
             {
                 new Produto { ProdutoNome = "CELULAR A50", ProdutoDescricao = "CELULAR SAMSUNG A50 128GB", CategoriaId = 38 },
@@ -89,6 +90,7 @@ namespace CrudAspNetMVC.Data
                 context.Produtos.Add(p);
             }
             context.SaveChanges();
+            */
 
             var formaPagamento = new FormaPagamento[]
            {

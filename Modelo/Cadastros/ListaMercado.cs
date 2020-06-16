@@ -7,7 +7,7 @@ using Modelo.Cadastros.Enums;
 
 namespace Modelo.Cadastros
 {
-    public class Mercado
+    public class ListaMercado
     {
         [Key]
         public long? MercadoId { get; set; }

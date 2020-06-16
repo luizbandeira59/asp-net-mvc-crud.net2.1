@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Modelo.Cadastros.Produto>
+﻿@model IEnumerable<Modelo.Listas.ListaDesejo>
 
 @{
-	ViewData["Title"] = "Lista de Produtos";
-	Layout = "_LayoutIES";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_LayoutIES.cshtml";
 }
 
 <link rel="stylesheet" href="~/assets/css/estilo-botão-tabela.css" />
@@ -28,7 +28,6 @@
 {
 	return;
 }
-
 
 <div class="content">
 	<div class="container-fluid">
@@ -67,16 +66,22 @@
 							<thead>
 								<tr>
 									<th>
-										<b>@Html.DisplayNameFor(model => model.ProdutoId)</b>
+										@Html.DisplayNameFor(model => model.DesejoValor)
 									</th>
 									<th>
-										<b>@Html.DisplayNameFor(model => model.ProdutoNome)</b>
+										@Html.DisplayNameFor(model => model.DesejoData)
 									</th>
 									<th>
-										<b>@Html.DisplayNameFor(model => model.ProdutoDescricao)</b>
+										@Html.DisplayNameFor(model => model.Status)
 									</th>
 									<th>
-										<b>@Html.DisplayNameFor(model => model.Categoria.CatNome)</b>
+										@Html.DisplayNameFor(model => model.Produto)
+									</th>
+									<th>
+										@Html.DisplayNameFor(model => model.FormaPagamento)
+									</th>
+									<th>
+										@Html.DisplayNameFor(model => model.Categoria)
 									</th>
 									<th></th>
 								</tr>
@@ -85,34 +90,32 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td style="padding:2px">
-											@Html.DisplayFor(modelItem => item.ProdutoId)
-										</td>
-										<td style="padding:2px">
-											@Html.DisplayFor(modelItem => item.ProdutoNome)
-										</td>
-										<td style="padding:2px">
-											@Html.DisplayFor(modelItem => item.ProdutoDescricao)
-										</td>
-										<td style="padding-left:2px">
-											@Html.DisplayFor(modelItem => item.Categoria.CatNome)
+										<td>
+											@Html.DisplayFor(modelItem => item.DesejoValor)
 										</td>
 										<td>
-											<a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning pull-right">
-												<span class="glyphicon glyphicon-edit"></span>
-											</a>
-											<a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info pull-right">
-												<span class="glyphicon glyphicon-eye-open"></span>
-											</a>
-											<a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger pull-right">
-												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-											</a>
+											@Html.DisplayFor(modelItem => item.DesejoData)
+										</td>
+										<td>
+											@Html.DisplayFor(modelItem => item.Status)
+										</td>
+										<td>
+											@Html.DisplayFor(modelItem => item.Produto.ProdutoId)
+										</td>
+										<td>
+											@Html.DisplayFor(modelItem => item.FormaPagamento.FormaId)
+										</td>
+										<td>
+											@Html.DisplayFor(modelItem => item.Categoria.CategoriaId)
+										</td>
+										<td>
+											<a asp-action="Edit" asp-route-id="@item.DesejoId">Edit</a> |
+											<a asp-action="Details" asp-route-id="@item.DesejoId">Details</a> |
+											<a asp-action="Delete" asp-route-id="@item.DesejoId">Delete</a>
 										</td>
 									</tr>
-
 								}
 							</tbody>
-
 						</table>
 					</div>
 				</div>
@@ -120,8 +123,6 @@
 		</div>
 	</div>
 </div>
-
-
 @section ScriptPage {
 	<environment include="Development">
 		<script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>

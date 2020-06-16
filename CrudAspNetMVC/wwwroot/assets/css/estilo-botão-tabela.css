@@ -46,8 +46,8 @@ th {
 
 thead th {
 	text-align: center;
-	padding:2px;
 	background: #808080;
+	padding:5px;
 }
 
 tr {
@@ -56,7 +56,6 @@ tr {
 }
 
 td, th {
-	padding:5px;
 	color: #fff;
 }
 

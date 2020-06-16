@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modelo.Listas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,9 +25,11 @@ namespace Modelo.Cadastros
         public long? MercadoId { get; set; }
         */
 
-        public virtual ICollection<Mercado> Mercados { get; set; }
-        public virtual ICollection<ListaDesejos> ListaDesejos { get; set; }
+        public virtual ICollection<ListaMercado> Mercados { get; set; }
+        public virtual ICollection<ListaDesejo> ListaDesejos { get; set; }
         public virtual ICollection<DespesaDir> DespesasDiretas { get; set; }
-
+        public virtual ICollection<DespesaFixa> DespesasFixas { get; set; }
+        public virtual ICollection<PagamentoProduto> PagamentoProdutos { get; set; }
+        public virtual ICollection<Produto> Produtos { get; set; }
     }
 }

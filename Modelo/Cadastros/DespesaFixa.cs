@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Modelo.Cadastros
 {
-    public class DespesaDir
+    public class DespesaFixa
     {
         [Key]
-        public long? DespesaDirId { get; set; }
+        public long? DespesaFixId { get; set; }
 
         [Display(Name = "Valor Da Despesa")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double DespDirValor { get; set; }
+        public double DespFixValor { get; set; }
 
         [Display(Name = "Data da Despesa")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime DespDirData { get; set; }
+        public DateTime DespFixData { get; set; }
 
         [Display(Name = "Situação Compra")]
         public StatusCompra Status { get; set; }
@@ -36,3 +36,5 @@ namespace Modelo.Cadastros
         public long? ProdutoId { get; set; }
     }
 }
+
+
