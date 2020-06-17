@@ -5,9 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Controle\**" />
+    <Content Remove="Views\Controle\**" />
+    <EmbeddedResource Remove="Views\Controle\**" />
+    <None Remove="Views\Controle\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Contact.cshtml" />
     <Content Remove="wwwroot\assets\css\estilo-btn-table.css" />
+    <Content Remove="wwwroot\assets\css\light-bootstrap-dashboard.css" />
     <Content Remove="wwwroot\assets\css\light-bootstrap.css" />
     <Content Remove="wwwroot\assets\css\light-bootstrap1.css" />
     <Content Remove="wwwroot\assets\fonts\fontawesome-webfont.ttf" />
@@ -31,6 +39,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modelo\Modelo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Cadastros\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Listas\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

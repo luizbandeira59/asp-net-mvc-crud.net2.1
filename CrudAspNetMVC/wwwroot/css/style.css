@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Numans');
+
 
 html, body {
 	background-image: url('../images/lwallpaper.jpg');
@@ -21,7 +21,6 @@ html, body {
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 400px;
-	background-color: rgba(0,0,0,0.5) !important;
 }
 
 .social_icon span {
@@ -49,12 +48,12 @@ html, body {
 	width: 50px;
 	background-color: #BFEFFF;
 	color: black;
-	border: 0 !important;
+	border: 0;
 }
 
 input:focus {
-	outline: 0 0 0 0 !important;
-	box-shadow: 0 0 0 0 !important;
+	outline: 0 0 0 0;
+	box-shadow: 0 0 0 0;
 }
 
 .remember {

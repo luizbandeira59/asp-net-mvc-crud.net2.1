@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CrudAspNetMVC.Models.Infra;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Modelo.Cadastros;
 using Modelo.Listas;
 
 namespace CrudAspNetMVC.Data
 {
-    public class IESContext : DbContext
+    public class IESContext : IdentityDbContext<UsuarioApp>
     {
 
         public DbSet<Categoria> Categorias { get; set; }

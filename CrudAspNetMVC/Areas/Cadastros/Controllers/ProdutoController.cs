@@ -1,5 +1,6 @@
 ﻿using CrudAspNetMVC.Data;
 using CrudAspNetMVC.Data.DAL.Cadastros;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +9,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace CrudAspNetMVC.Controllers
+namespace CrudAspNetMVC.Areas.Cadastros.Controllers
 {
+    [Area("Cadastros")]
+    [Authorize]
     public class ProdutoController : Controller
     {
         private readonly IESContext _context;

@@ -429,7 +429,7 @@ input:focus {
 
 	.sidebar:before {
 		opacity: .33;
-		background: ##A9A9A9;
+		background: #A9A9A9;
 	}
 
 	.sidebar:after {

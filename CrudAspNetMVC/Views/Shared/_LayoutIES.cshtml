@@ -1,14 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<CrudAspNetMVC.Models.Infra.UsuarioApp> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<CrudAspNetMVC.Models.Infra.UsuarioApp> UserManager
+<!DOCTYPE html>
 
 <html>
 <head>
 	<style>
 		.input-group {
-			display:grid;
+			display: grid;
 		}
 
 		.form-group {
-			display:grid;
+			display: grid;
 		}
 	</style>
 
@@ -25,8 +27,8 @@
 		<link href="~/assets/css/font-awesome.min.css" rel=" stylesheet" />
 		<link href="~/assets/css/animate.min.css" rel="stylesheet" />
 		<link href="~/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-		<link href="~/assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
-		<link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet"  />
+		<link href="~/assets/css/light-bootstrap-dashboard1.css" rel="stylesheet" />
+		<link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
 	</environment>
 
 	<environment exclude="Development">
@@ -43,13 +45,14 @@
 <body>
 
 	<div class="wrapper">
-		<div class="sidebar" data-color="" data-image="../../assets/img/sidebar-4.jpg">
+		<div class="sidebar" data-color="" data-image="../../../assets/img/sidebar-4.jpg">
 			<div class="sidebar-wrapper">
 				<div class="logo">
 					<a class="simple-text" asp-controller="Controles" asp-action="Index">
 						Controle Pessoal
 					</a>
 				</div>
+
 				<ul class="nav">
 					<li class="active">
 						<a asp-controller="Controle" asp-action="Index">
@@ -58,31 +61,31 @@
 						</a>
 					</li>
 					<li>
-						<a asp-controller="Mercado" asp-action="Index">
+						<a asp-controller="Mercado" asp-action="Index" asp-area="Listas">
 							<i class="pe-7s-cart"></i>
 							<p>Supermercado</p>
 						</a>
 					</li>
 					<li>
-						<a asp-controller="DespesaFixas" asp-action="Index">
+						<a asp-controller="DespesaFixas" asp-action="Index" asp-area="Listas">
 							<i class="fa fa-usd"></i>
 							<p>Despesas Fixas</p>
 						</a>
 					</li>
 					<li>
-						<a asp-controller="DespesaDir" asp-action="Index">
+						<a asp-controller="DespesaDir" asp-action="Index" asp-area="Listas">
 							<i class="pe-7s-calculator"></i>
 							<p>Despesas Diretas</p>
 						</a>
 					</li>
 					<li>
-						<a asp-controller="ListaDesejos" asp-action="Index">
+						<a asp-controller="Desejo" asp-action="Index" asp-area="Listas">
 							<i class="pe-7s-note2"></i>
 							<p>Lista de Desejos</p>
 						</a>
 					</li>
 					<li>
-						<a asp-controller="Produto" asp-action="Index">
+						<a asp-controller="Produto" asp-action="Index" asp-area="Cadastros">
 							<i class="pe-7s-box1"></i>
 							<p>Produtos</p>
 						</a>
@@ -114,7 +117,7 @@
 							<span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" asp-controller="Controle" asp-action="Index"></a>
-						<!-- redireciona a algum link, estava dashbord -->
+						<!-- redireciona a algum link-->
 					</div>
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav navbar-left">
@@ -155,6 +158,29 @@
 							</li>
 						</ul>
 
+						<ul class="nav navbar-nav navbar-center">
+							<li>
+
+								<p>
+									@if (SignInManager.IsSignedIn(User))
+									{
+										<div class="container-fluid" style="padding-left:110px;padding-top:10px;margin: 10px 3px;position: relative;">
+
+											<a class="active">Olá @UserManager.GetUserName(User), seja bem-vindo(a)</a>
+										</div>
+									}
+									else
+									{
+										<a class="nav-item nav-link" asp-area="" asp-controller="Infra" asp-action="Acessar">
+											Informar usuário/senha para acessar
+										</a>
+									}
+								</p>
+
+							</li>
+						</ul>
+
+
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<a class="nav-item nav-link" asp-controller="Desejo" asp-action="Index">
@@ -172,54 +198,52 @@
 								</a>
 								<ul class="dropdown-menu">
 
-									<li><a href="~/Categoria/Details/1">Acessórios</a></li>
-									<li><a href="~/Categoria/Details/2">Mercado</a></li>
-									<li><a href="~/Categoria/Details/3">Moradia</a></li>
-									<li><a href="~/Categoria/Details/4">Outras Rendas</a></li>
-									<li><a href="~/Categoria/Details/5">Outros Gastos</a></li>
-									<li><a href="~/Categoria/Details/6">Mascote</a></li>
-									<li><a href="~/Categoria/Details/7">Presente ou Doação</a></li>
-									<li><a href="~/Categoria/Details/8">Rendimentos</a></li>
-									<li><a href="~/Categoria/Details/9">Resgate</a></li>
-									<li><a href="~/Categoria/Details/10">Salário</a></li>
-									<li><a href="~/Categoria/Details/11">Saques</a></li>
-									<li><a href="~/Categoria/Details/12">Saúde</a></li>
-									<li><a href="~/Categoria/Details/13">Serviços</a></li>
-									<li><a href="~/Categoria/Details/14">Telefonia/Internet/Tv</a></li>
-									<li><a href="~/Categoria/Details/15">Transferência</a></li>
-									<li><a href="~/Categoria/Details/16">Transporte</a></li>
-									<li><a href="~/Categoria/Details/17">Lazer e Hobbie</a></li>
-									<li><a href="~/Categoria/Details/18">Juros</a></li>
-									<li><a href="~/Categoria/Details/19">Jogo Eletrônico</a></li>
-									<li><a href="~/Categoria/Details/20">Investimento</a></li>
-									<li><a href="~/Categoria/Details/21">Bônus</a></li>
-									<li><a href="~/Categoria/Details/22">Cheque Especial</a></li>
-									<li><a href="~/Categoria/Details/23">Comidas e Bebidas</a></li>
-									<li><a href="~/Categoria/Details/24">Contas Residenciais</a></li>
-									<li><a href="~/Categoria/Details/25">Crediário</a></li>
-									<li><a href="~/Categoria/Details/26">Crédito Consignado</a></li>
-									<li><a href="~/Categoria/Details/27">Cuidados Pessoais</a></li>
-									<li><a href="~/Categoria/Details/28">Vestuário</a></li>
-									<li><a href="~/Categoria/Details/29">Depesas com Trabalho</a></li>
-									<li><a href="~/Categoria/Details/30">Eletrônico</a></li>
-									<li><a href="~/Categoria/Details/31">Eletrodoméstico</a></li>
-									<li><a href="~/Categoria/Details/32">Empréstimo</a></li>
-									<li><a href="~/Categoria/Details/33">Encargos</a></li>
-									<li><a href="~/Categoria/Details/34">Família e Filhos</a></li>
-									<li><a href="~/Categoria/Details/35">FGTS</a></li>
-									<li><a href="~/Categoria/Details/36">Imposto</a></li>
-									<li><a href="~/Categoria/Details/37">Educação</a></li>
-									<li><a href="~/Categoria/Details/38">Compras</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/1">Acessórios</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/2">Mercado</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/3">Moradia</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/4">Outras Rendas</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/5">Outros Gastos</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/6">Mascote</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/7">Presente ou Doação</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/8">Rendimentos</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/9">Resgate</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/10">Salário</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/11">Saques</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/12">Saúde</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/13">Serviços</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/14">Telefonia/Internet/Tv</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/15">Transferência</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/16">Transporte</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/17">Lazer e Hobbie</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/18">Juros</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/19">Jogo Eletrônico</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/20">Investimento</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/21">Bônus</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/22">Cheque Especial</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/23">Comidas e Bebidas</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/24">Contas Residenciais</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/25">Crediário</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/26">Crédito Consignado</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/27">Cuidados Pessoais</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/28">Vestuário</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/29">Depesas com Trabalho</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/30">Eletrônico</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/31">Eletrodoméstico</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/32">Empréstimo</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/33">Encargos</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/34">Família e Filhos</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/35">FGTS</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/36">Imposto</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/37">Educação</a></li>
+									<li><a href="~/Cadastros/Categoria/Details/38">Compras</a></li>
 									<!--<li class="divider"></li> -->
 									<!--precisa de asp para categorias,ou data, ou algo que va na drop down-->
 								</ul>
 							</li>
 
 							<li>
-								<a href="#">
-									<!--asp para metodo encerrar sessão, logout ou algo do tipo-->
-									<p>Sair</p>
-								</a>
+								<!--asp para metodo encerrar sessão, logout ou algo do tipo-->
+								@Html.ActionLink("Sair", "Sair", "Infra", new { area = "" })
 							</li>
 							<li class="separator hidden-lg hidden-md"></li>
 						</ul>

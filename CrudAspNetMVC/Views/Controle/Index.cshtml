@@ -1,0 +1,245 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutIES.cshtml";
+}
+<head>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="~/assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+	<script src="~/assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="~/assets/js/chartist.min.js"></script>
+	<script src="~/assets/js/bootstrap-notify.js"></script>
+	<script src="~/assets/js/demo.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			demo.initChartist();
+
+			$.notify({
+				icon: 'pe-7s-gift',
+				message: "Bem vindo ao <b>Painel de Controle</b> - Você não tem Avisos."
+
+			}, {
+					type: 'info',
+					timer: 4000
+				});
+
+		});
+	</script>
+	<style>
+
+		tr:hover {
+			background-color: #00bc8c;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">Resumo</h4>
+							<p class="category">Resumo do mês...</p>
+							<!--colocar um método para puxar o mês-->
+						</div>
+						<div class="content">
+							<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+							<div class="footer">
+								<div class="legend">
+									<i class="fa fa-circle text-info"></i> Alimentação
+									<i class="fa fa-circle text-danger"></i> Lazer
+									<i class="fa fa-circle text-warning"></i> Pets
+								</div>
+								<hr>
+								<div class="stats">
+									<i class="fa fa-clock-o"></i> Ultima Atualização 2 dias atrás
+									<!--Método para buscar dia/hora-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">Programações</h4>
+							<p class="category">Valor/meses</p>
+						</div>
+						<div class="content">
+							<div id="chartHours" class="ct-chart"></div>
+							<div class="footer">
+								<div class="legend">
+									<i class="fa fa-circle text-info"></i> Viajem
+									<i class="fa fa-circle text-danger"></i> Poupança
+									<i class="fa fa-circle text-warning"></i> Reforma
+								</div>
+								<hr>
+								<div class="stats">
+									<i class="fa fa-history"></i> Atualizado a 33 minutos atrás
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card ">
+						<div class="header">
+							<h4 class="title">Detalhes Mensais</h4>
+							<p class="category">Todos os Produtos Incluindo Taxas</p>
+						</div>
+						<div class="content">
+							<div id="chartActivity" class="ct-chart"></div>
+							<div class="footer">
+								<div class="legend">
+									<i class="fa fa-circle text-info"></i> Recebiveis
+									<i class="fa fa-circle text-danger"></i> Despesas
+								</div>
+								<hr>
+								<div class="stats">
+									<i class="fa fa-check"></i> Atualizado a 33 minutos atrás
+									<!--método para checar e confirmar data-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card ">
+						<div class="header">
+							<h4 class="title">Tasks</h4>
+							<p class="category">Controle de Programações</p>
+						</div>
+						<div class="content">
+							<div class="table-full-width">
+								<table class="un table">
+									<tbody>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox1" type="checkbox">
+													<label for="checkbox1"></label>
+												</div>
+											</td>
+											<td>Sua Lista de Desejo esta sem nenhum produto sendo controlado."</td>
+											<td class="td-actions text-right">
+												<button asp-action="Create" asp-controller="ListaDesejos" type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox2" type="checkbox" checked>
+													<label for="checkbox2"></label>
+												</div>
+											</td>
+											<td>Compra de roupas previsto para mês que vem"</td>
+											<td class="td-actions text-right">
+												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox3" type="checkbox">
+													<label for="checkbox3"></label>
+												</div>
+											</td>
+											<td>Não há previsão de Supermercado para Junho</td>
+											<td class="td-actions text-right">
+												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox4" type="checkbox" checked>
+													<label for="checkbox4"></label>
+												</div>
+											</td>
+											<td>Previsão de viagem para Dezembro"</td>
+											<td class="td-actions text-right">
+												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox5" type="checkbox">
+													<label for="checkbox5"></label>
+												</div>
+											</td>
+											<td>trala tralalala trala</td>
+											<td class="td-actions text-right">
+												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input id="checkbox6" type="checkbox" checked>
+													<label for="checkbox6"></label>
+												</div>
+											</td>
+											<td>Barara bararaa baraaa</td>
+											<td class="td-actions text-right">
+												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+													<i class="fa fa-edit"></i>
+												</button>
+												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+													<i class="fa fa-times"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="footer">
+								<hr>
+								<div class="stats">
+									<i class="fa fa-history"></i> Atualizado há 3 minutos
+									<!--método para get hora/dia-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+
+
+

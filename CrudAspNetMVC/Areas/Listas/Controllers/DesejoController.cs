@@ -1,13 +1,16 @@
 ﻿using CrudAspNetMVC.Data;
 using CrudAspNetMVC.Data.DAL.Listas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modelo.Listas;
 using System.Threading.Tasks;
 
 
-namespace CrudAspNetMVC.Controllers
+namespace CrudAspNetMVC.Areas.Listas.Controllers
 {
+    [Area("Listas")]
+    [Authorize]
     public class DesejoController : Controller
     {
         private readonly IESContext _context;
