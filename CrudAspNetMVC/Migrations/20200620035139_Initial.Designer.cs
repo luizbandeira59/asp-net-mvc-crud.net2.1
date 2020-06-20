@@ -4,14 +4,16 @@ using CrudAspNetMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CrudAspNetMVC.Migrations
 {
     [DbContext(typeof(ControleContext))]
-    partial class IESContextModelSnapshot : ModelSnapshot
+    [Migration("20200620035139_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,7 +182,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.Categoria", b =>
+            modelBuilder.Entity("Modelo.Cadastros.Categoria", b =>
                 {
                     b.Property<long?>("CategoriaId")
                         .ValueGeneratedOnAdd()
@@ -193,7 +195,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.FormaPagamento", b =>
+            modelBuilder.Entity("Modelo.Cadastros.FormaPagamento", b =>
                 {
                     b.Property<long?>("FormaId")
                         .ValueGeneratedOnAdd()
@@ -206,7 +208,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("FormaPagamento");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.PagamentoProduto", b =>
+            modelBuilder.Entity("Modelo.Cadastros.PagamentoProduto", b =>
                 {
                     b.Property<long?>("ProdutoId");
 
@@ -219,7 +221,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("PagamentoProduto");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.Produto", b =>
+            modelBuilder.Entity("Modelo.Cadastros.Produto", b =>
                 {
                     b.Property<long?>("ProdutoId")
                         .ValueGeneratedOnAdd()
@@ -246,7 +248,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.ProdutoStatus", b =>
+            modelBuilder.Entity("Modelo.Cadastros.ProdutoStatus", b =>
                 {
                     b.Property<long?>("ProdutoId");
 
@@ -259,7 +261,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("ProdutoStatus");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.StatusCompra", b =>
+            modelBuilder.Entity("Modelo.Cadastros.StatusCompra", b =>
                 {
                     b.Property<long?>("StatusId")
                         .ValueGeneratedOnAdd()
@@ -272,7 +274,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("Status");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.DespesaDir", b =>
+            modelBuilder.Entity("Modelo.Listas.DespesaDir", b =>
                 {
                     b.Property<long?>("DespesaDirId")
                         .ValueGeneratedOnAdd()
@@ -303,7 +305,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("DespesaDiretas");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.DespesaFixa", b =>
+            modelBuilder.Entity("Modelo.Listas.DespesaFixa", b =>
                 {
                     b.Property<long?>("DespesaFixId")
                         .ValueGeneratedOnAdd()
@@ -334,7 +336,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("DespesasFixas");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.ListaDesejo", b =>
+            modelBuilder.Entity("Modelo.Listas.ListaDesejo", b =>
                 {
                     b.Property<long?>("DesejoId")
                         .ValueGeneratedOnAdd()
@@ -369,7 +371,7 @@ namespace CrudAspNetMVC.Migrations
                     b.ToTable("Desejos");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.ListaMercado", b =>
+            modelBuilder.Entity("Modelo.Listas.ListaMercado", b =>
                 {
                     b.Property<long?>("MercadoId")
                         .ValueGeneratedOnAdd()
@@ -445,123 +447,123 @@ namespace CrudAspNetMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.PagamentoProduto", b =>
+            modelBuilder.Entity("Modelo.Cadastros.PagamentoProduto", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("PagamentoProdutos")
                         .HasForeignKey("FormaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("PagamentoProdutos")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.Produto", b =>
+            modelBuilder.Entity("Modelo.Cadastros.Produto", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Categoria", "Categoria")
+                    b.HasOne("Modelo.Cadastros.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("Produtos")
                         .HasForeignKey("FormaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "StatusCompra")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "StatusCompra")
                         .WithMany("Produtos")
                         .HasForeignKey("StatusId");
                 });
 
-            modelBuilder.Entity("Modelo.CadastrosBLL.ProdutoStatus", b =>
+            modelBuilder.Entity("Modelo.Cadastros.ProdutoStatus", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("ProdutosStatuss")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "StatusCompra")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "StatusCompra")
                         .WithMany("ProdutosStatuss")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.DespesaDir", b =>
+            modelBuilder.Entity("Modelo.Listas.DespesaDir", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Categoria", "Categoria")
+                    b.HasOne("Modelo.Cadastros.Categoria", "Categoria")
                         .WithMany("DespesaDiretas")
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("DespesasDiretas")
                         .HasForeignKey("FormaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("DespesasDiretas")
                         .HasForeignKey("ProdutoId");
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "Status")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "Status")
                         .WithMany("DespesasDiretas")
                         .HasForeignKey("StatusId");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.DespesaFixa", b =>
+            modelBuilder.Entity("Modelo.Listas.DespesaFixa", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Categoria", "Categoria")
+                    b.HasOne("Modelo.Cadastros.Categoria", "Categoria")
                         .WithMany("DespesasFixas")
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("DespesasFixas")
                         .HasForeignKey("FormaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("DespesasFixas")
                         .HasForeignKey("ProdutoId");
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "Status")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "Status")
                         .WithMany("DespesasFixas")
                         .HasForeignKey("StatusId");
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.ListaDesejo", b =>
+            modelBuilder.Entity("Modelo.Listas.ListaDesejo", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Categoria", "Categoria")
+                    b.HasOne("Modelo.Cadastros.Categoria", "Categoria")
                         .WithMany("ListaDesejos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("ListaDesejos")
                         .HasForeignKey("FormaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("Desejos")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "StatusCompra")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "StatusCompra")
                         .WithMany("ListaDesejos")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Modelo.ListasBLL.ListaMercado", b =>
+            modelBuilder.Entity("Modelo.Listas.ListaMercado", b =>
                 {
-                    b.HasOne("Modelo.CadastrosBLL.Categoria", "Categoria")
+                    b.HasOne("Modelo.Cadastros.Categoria", "Categoria")
                         .WithMany("Mercados")
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.FormaPagamento", "FormaPagamento")
+                    b.HasOne("Modelo.Cadastros.FormaPagamento", "FormaPagamento")
                         .WithMany("Mercados")
                         .HasForeignKey("FormaId");
 
-                    b.HasOne("Modelo.CadastrosBLL.Produto", "Produto")
+                    b.HasOne("Modelo.Cadastros.Produto", "Produto")
                         .WithMany("Mercados")
                         .HasForeignKey("ProdutoId");
 
-                    b.HasOne("Modelo.CadastrosBLL.StatusCompra", "Status")
+                    b.HasOne("Modelo.Cadastros.StatusCompra", "Status")
                         .WithMany("Mercados")
                         .HasForeignKey("StatusId");
                 });

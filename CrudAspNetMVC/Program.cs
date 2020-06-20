@@ -24,8 +24,8 @@ namespace CrudAspNetMVC
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<IESContext>();
-                    IESDbInit.Initialize(context);
+                    var context = services.GetRequiredService<ControleContext>();
+                    SeedingService.Initialize(context);
                 }
                 catch (Exception ex)
                 {

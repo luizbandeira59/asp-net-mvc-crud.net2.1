@@ -1,4 +1,4 @@
-﻿@model Modelo.Cadastros.Produto
+﻿@model Modelo.CadastrosBLL.Produto
 
 @{
 	ViewData["Title"] = "Alterar Produto";
@@ -34,7 +34,15 @@
 									<div class="form-group">
 										<label asp-for="CategoriaId" class="control-label"></label>
 										<select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias"></select>
+									</div>
+									<div class="form-group">
+										<label asp-for="FormaId" class="control-label"></label>
+										<select asp-for="FormaId" class="form-control" asp-items="@ViewBag.Formas"></select>
+									</div>
 
+									<div class="form-group">
+										<label asp-for="StatusId" class="control-label"></label>
+										<select asp-for="StatusId" class="form-control" asp-items="@ViewBag.Status"></select>
 									</div>
 
 									<div class="form-group text-center h3">

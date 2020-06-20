@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+//UI – Camada de Apresentação(User Interface)
+
 namespace CrudAspNetMVC.Models.Infra
 {
     public class AcessarViewModel

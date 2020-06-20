@@ -1,4 +1,6 @@
-﻿namespace Modelo.Cadastros
+﻿namespace Modelo.CadastrosBLL
+
+//BLL – Camada de Regra de negócios(Business Logic Layer)
 {
     public class PagamentoProduto
     {

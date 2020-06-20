@@ -81,21 +81,7 @@
     transform-origin: left;
     transition: transform 0.9 ease-in-out;
 }
-.btn
-{
-    margin-top: 20px;
-    border: none;
-    box-shadow: none;
-    padding: 10px 25px;
-    background: #111;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-.btn:hover
-{
-    background: #00bcd4;
-}
+
 
 .purple-border textarea {
     border: 1px solid #ba68c8;

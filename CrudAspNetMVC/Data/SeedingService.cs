@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Modelo.Cadastros;
-using Modelo.Cadastros.Enums;
+using Modelo.CadastrosBLL;
 
 namespace CrudAspNetMVC.Data
 {
-    public class IESDbInit
+    public class SeedingService
     {
-        public static void Initialize(IESContext context)
+        public static void Initialize(ControleContext context)
         {
-            //context.Database.EnsureDeleted();
-           // context.Database.EnsureCreated();
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
-            if (context.Categorias.Any() || context.Produtos.Any() || context.Formas.Any() || context.Desejos.Any())
+            if (context.Categorias.Any() || context.Produtos.Any() || 
+                context.Formas.Any() || context.Desejos.Any() || context.Status.Any()) 
             {
                 return;//ja possui dados
             }
@@ -69,6 +69,19 @@ namespace CrudAspNetMVC.Data
             }
             context.SaveChanges();
 
+            var statusCompra = new StatusCompra[]
+         {
+                new StatusCompra { StatusNome = "Pendente" },
+                new StatusCompra { StatusNome = "Comprado" },
+                new StatusCompra { StatusNome = "Cancelado" }
+         };
+
+            foreach (StatusCompra s in statusCompra)
+            {
+                context.Status.Add(s);
+            }
+
+            context.SaveChanges();
             /*
             var produtos = new Produto[]
             {

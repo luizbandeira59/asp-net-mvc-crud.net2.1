@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Modelo.Cadastros.Enums;
+using Modelo.CadastrosBLL;
+using Modelo.ListasBLL;
 
-namespace Modelo.Cadastros
+//BLL – Camada de Regra de negócios(Business Logic Layer)
+
+namespace Modelo.ListasBLL
 {
     public class ListaMercado
     {
@@ -15,7 +16,9 @@ namespace Modelo.Cadastros
         public DateTime MercadoData { get; set; }
 
         [Display(Name = "Situação da Compra")]
-        public  StatusCompra StatusCompra { get; set; }
+        public StatusCompra Status { get; set; }
+        public long? StatusId { get; set; }
+
         [Display(Name = "Produto")]
         public Produto Produto { get; set; }
         public long? ProdutoId { get; set; }

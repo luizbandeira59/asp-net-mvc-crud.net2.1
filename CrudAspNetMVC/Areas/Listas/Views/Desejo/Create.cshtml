@@ -1,4 +1,4 @@
-﻿@model Modelo.Listas.ListaDesejo
+﻿@model Modelo.ListasBLL.ListaDesejo
 
 @{
 	ViewData["Title"] = "Create";
@@ -31,23 +31,27 @@
 										<span asp-validation-for="DesejoData" class="text-danger"></span>
 									</div>
 									<div class="form-group">
-										<label asp-for="Status" class="control-label"></label>
-										<select asp-for="Status" class="form-control"></select>
-										<span asp-validation-for="Status" class="text-danger"></span>
-									</div>
-									<div class="form-group">
 										<label asp-for="Produto.ProdutoNome" class="control-label"></label>
 										<input asp-for="Produto.ProdutoNome" class="form-control" />
 										<span asp-validation-for="Produto.ProdutoNome" class="text-danger"></span>
 									</div>
 									<div class="form-group">
-										<label asp-for="FormaPagamento.FormaNome" class="control-label"></label>
-										<select asp-for="FormaId" class="form-control" asp-items="@(new SelectList(@ViewBag.Formas, "FormaId", "FormaNome"))"></select>
-										
-									</div>
-									<div class="form-group">
 										<label asp-for="CategoriaId" class="control-label hidden"></label>
 										<select asp-for="CategoriaId" class="form-control" asp-items="@(new SelectList(@ViewBag.Categorias, "CategoriaId", "CatNome"))"></select>
+									</div>
+									<div class="form-group">
+										<label asp-for="StatusId" class="control-label hidden"></label>
+										<select asp-for="StatusId" class="form-control" asp-items="@(new SelectList(@ViewBag.Status, "StatusId", "StatusNome"))"></select>
+									</div>
+
+									<div class="form-group">
+										<label asp-for="FormaId" class="control-label hidden"></label>
+										<select asp-for="FormaId" class="form-control" asp-items="@(new SelectList(@ViewBag.Formas, "FormaId", "FormaNome"))"></select>
+									</div>
+									<div class="form-group">
+										<label asp-for="Produto.ProdutoDescricao" class="control-label"></label>
+										<input asp-for="Produto.ProdutoDescricao" class="form-control" />
+										<span asp-validation-for="Produto.ProdutoDescricao" class="text-danger"></span>
 									</div>
 									<div class="form-group text-left h3">
 										<input type="submit" value="Registrar" class="btn btn-block btn-fill" />
@@ -56,7 +60,6 @@
 								</form>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>

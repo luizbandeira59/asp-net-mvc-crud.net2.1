@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CrudAspNetMVC.Migrations
 {
-    public partial class Identity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,6 +71,19 @@ namespace CrudAspNetMVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FormaPagamento", x => x.FormaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    StatusId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StatusNome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.StatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,7 +201,8 @@ namespace CrudAspNetMVC.Migrations
                     ProdutoNome = table.Column<string>(nullable: true),
                     ProdutoDescricao = table.Column<string>(nullable: true),
                     CategoriaId = table.Column<long>(nullable: true),
-                    FormaId = table.Column<long>(nullable: true)
+                    FormaId = table.Column<long>(nullable: true),
+                    StatusId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,6 +219,12 @@ namespace CrudAspNetMVC.Migrations
                         principalTable: "FormaPagamento",
                         principalColumn: "FormaId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Produtos_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,10 +235,10 @@ namespace CrudAspNetMVC.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DesejoValor = table.Column<double>(nullable: false),
                     DesejoData = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
+                    StatusId = table.Column<long>(nullable: false),
                     ProdutoId = table.Column<long>(nullable: false),
-                    FormaId = table.Column<long>(nullable: true),
-                    CategoriaId = table.Column<long>(nullable: true)
+                    FormaId = table.Column<long>(nullable: false),
+                    CategoriaId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,18 +248,24 @@ namespace CrudAspNetMVC.Migrations
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
                         principalColumn: "CategoriaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Desejos_FormaPagamento_FormaId",
                         column: x => x.FormaId,
                         principalTable: "FormaPagamento",
                         principalColumn: "FormaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Desejos_Produtos_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produtos",
                         principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Desejos_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -251,7 +277,7 @@ namespace CrudAspNetMVC.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DespDirValor = table.Column<double>(nullable: false),
                     DespDirData = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
+                    StatusId = table.Column<long>(nullable: true),
                     FormaId = table.Column<long>(nullable: true),
                     CategoriaId = table.Column<long>(nullable: true),
                     ProdutoId = table.Column<long>(nullable: true)
@@ -277,6 +303,12 @@ namespace CrudAspNetMVC.Migrations
                         principalTable: "Produtos",
                         principalColumn: "ProdutoId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DespesaDiretas_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -287,7 +319,7 @@ namespace CrudAspNetMVC.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DespFixValor = table.Column<double>(nullable: false),
                     DespFixData = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
+                    StatusId = table.Column<long>(nullable: true),
                     FormaId = table.Column<long>(nullable: true),
                     CategoriaId = table.Column<long>(nullable: true),
                     ProdutoId = table.Column<long>(nullable: true)
@@ -313,6 +345,12 @@ namespace CrudAspNetMVC.Migrations
                         principalTable: "Produtos",
                         principalColumn: "ProdutoId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DespesasFixas_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,7 +361,7 @@ namespace CrudAspNetMVC.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MercadoValor = table.Column<double>(nullable: false),
                     MercadoData = table.Column<DateTime>(nullable: false),
-                    StatusCompra = table.Column<int>(nullable: false),
+                    StatusId = table.Column<long>(nullable: true),
                     ProdutoId = table.Column<long>(nullable: true),
                     FormaId = table.Column<long>(nullable: true),
                     CategoriaId = table.Column<long>(nullable: true)
@@ -349,6 +387,12 @@ namespace CrudAspNetMVC.Migrations
                         principalTable: "Produtos",
                         principalColumn: "ProdutoId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Mercados_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,6 +416,30 @@ namespace CrudAspNetMVC.Migrations
                         column: x => x.ProdutoId,
                         principalTable: "Produtos",
                         principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProdutoStatus",
+                columns: table => new
+                {
+                    ProdutoId = table.Column<long>(nullable: false),
+                    StatusId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdutoStatus", x => new { x.ProdutoId, x.StatusId });
+                    table.ForeignKey(
+                        name: "FK_ProdutoStatus_Produtos_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produtos",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdutoStatus_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -430,6 +498,11 @@ namespace CrudAspNetMVC.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Desejos_StatusId",
+                table: "Desejos",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DespesaDiretas_CategoriaId",
                 table: "DespesaDiretas",
                 column: "CategoriaId");
@@ -443,6 +516,11 @@ namespace CrudAspNetMVC.Migrations
                 name: "IX_DespesaDiretas_ProdutoId",
                 table: "DespesaDiretas",
                 column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DespesaDiretas_StatusId",
+                table: "DespesaDiretas",
+                column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DespesasFixas_CategoriaId",
@@ -460,6 +538,11 @@ namespace CrudAspNetMVC.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DespesasFixas_StatusId",
+                table: "DespesasFixas",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mercados_CategoriaId",
                 table: "Mercados",
                 column: "CategoriaId");
@@ -475,6 +558,11 @@ namespace CrudAspNetMVC.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Mercados_StatusId",
+                table: "Mercados",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PagamentoProduto_FormaId",
                 table: "PagamentoProduto",
                 column: "FormaId");
@@ -488,6 +576,16 @@ namespace CrudAspNetMVC.Migrations
                 name: "IX_Produtos_FormaId",
                 table: "Produtos",
                 column: "FormaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Produtos_StatusId",
+                table: "Produtos",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdutoStatus_StatusId",
+                table: "ProdutoStatus",
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -523,6 +621,9 @@ namespace CrudAspNetMVC.Migrations
                 name: "PagamentoProduto");
 
             migrationBuilder.DropTable(
+                name: "ProdutoStatus");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -536,6 +637,9 @@ namespace CrudAspNetMVC.Migrations
 
             migrationBuilder.DropTable(
                 name: "FormaPagamento");
+
+            migrationBuilder.DropTable(
+                name: "Status");
         }
     }
 }

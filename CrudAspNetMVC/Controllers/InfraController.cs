@@ -92,8 +92,8 @@ namespace CrudAspNetMVC.Controllers
             else
             {
                 //redireciona a pagina de controle após logar
-                return RedirectToAction(nameof(Areas.Cadastros.Controllers.ProdutoController.Index),"Cadastros/Produto");
-                //return RedirectToAction("Index", "Produto", new { area = "Cadastros" });
+                return RedirectToAction(nameof(Areas.Cadastros.Controllers.ProdutoController.Index), "Cadastros/Produto");
+                //return RedirectToAction("Index", "Desejo", new { area = "Listas" });
             }
         }
 

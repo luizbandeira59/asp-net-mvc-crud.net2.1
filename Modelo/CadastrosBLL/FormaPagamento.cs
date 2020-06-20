@@ -1,11 +1,11 @@
-﻿using Modelo.Listas;
+﻿using Modelo.ListasBLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Modelo.Cadastros
+//BLL – Camada de Regra de negócios(Business Logic Layer)
+
+namespace Modelo.CadastrosBLL
 {
     public class FormaPagamento
     {
@@ -14,16 +14,6 @@ namespace Modelo.Cadastros
         public long? FormaId { get; set; }
         [Display(Name = "Método de Pagamento")]
         public string FormaNome { get; set; }
-
-        /*
-        public ListaDesejos ListaDesejos { get; set; }
-        public long? DesejoId { get; set; }
-        */
-
-        /*
-        public Mercado Mercado { get; set; }
-        public long? MercadoId { get; set; }
-        */
 
         public virtual ICollection<ListaMercado> Mercados { get; set; }
         public virtual ICollection<ListaDesejo> ListaDesejos { get; set; }

@@ -39,8 +39,8 @@
 			  asp-fallback-href="~/assets/css/font-awesome.min.css" />
 	</environment>
 
-
 	@RenderSection("Styles", required: false)
+
 </head>
 <body>
 
@@ -171,9 +171,13 @@
 									}
 									else
 									{
-										<a class="nav-item nav-link" asp-area="" asp-controller="Infra" asp-action="Acessar">
-											Informar usuário/senha para acessar
-										</a>
+
+										<div class="container-fluid" style="padding-left:110px;padding-top:10px;margin: 10px 3px;position: relative;">
+											<a class="nav-item nav-link" asp-area="" asp-controller="Infra" asp-action="Acessar">
+												Informar usuário/senha para acessar
+											</a>
+										</div>
+										
 									}
 								</p>
 

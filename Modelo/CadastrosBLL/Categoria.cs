@@ -1,11 +1,14 @@
-﻿using Modelo.Listas;
+﻿using Modelo.ListasBLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Modelo.CadastrosBLL;
 
-namespace Modelo.Cadastros
+//BLL – Camada de Regra de negócios(Business Logic Layer)
+
+namespace Modelo.CadastrosBLL
 {
     public class Categoria
     {

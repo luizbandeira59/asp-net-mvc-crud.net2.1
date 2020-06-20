@@ -3,24 +3,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudAspNetMVC.Data;
-using CrudAspNetMVC.Data.DAL.Cadastros;
+using CrudAspNetMVC.Data.CamadaAcessoDados.Cadastros;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Modelo.Cadastros;
+using Modelo.CadastrosBLL;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CrudAspNetMVC.Areas.Cadastros.Controllers
 {
+    
     [Area("Cadastros")]
     [Authorize]
     public class CategoriaController : Controller
     {
-        private readonly IESContext _context;
-        private readonly CategoriaDAL categoriaDAL;
 
-        public CategoriaController(IESContext context)
+        //INJEÇÃO DE DEPÊNDENCIA
+        private readonly ControleContext _context;
+        private readonly CategoriaServicos categoriaDAL;
+
+        public CategoriaController(ControleContext context)
         {
             _context = context;
-            categoriaDAL = new CategoriaDAL(context);
+            categoriaDAL = new CategoriaServicos(context);
         }
 
         //INDEX CATEGORIA/LISTA

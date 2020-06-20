@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Modelo.Cadastros.Produto>
+﻿@model IEnumerable<Modelo.CadastrosBLL.Produto>
 
 @{
 	ViewData["Title"] = "Lista de Produtos";
@@ -7,7 +7,7 @@
 
 
 <link rel="stylesheet" href="~/assets/css/estilo-botão-table2.css" />
-<link href="~/css/estilodejeso2.css" rel="stylesheet" />
+<link href="~/css/estilodesejo.css" rel="stylesheet" />
 
 @section Styles {
 	<environment include="Development">
@@ -67,7 +67,7 @@
 							</div>
 						</div>
 						<div class="content">
-							<table class="table">
+							<table class="un-table table">
 								<thead>
 									<tr>
 										<th>
@@ -113,10 +113,8 @@
 												</a>
 											</td>
 										</tr>
-
 									}
 								</tbody>
-
 							</table>
 						</div>
 					</div>

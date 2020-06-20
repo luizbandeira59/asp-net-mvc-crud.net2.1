@@ -37,12 +37,12 @@ namespace CrudAspNetMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<IESContext>(options => options.UseSqlServer(
+            services.AddDbContext<ControleContext>(options => options.UseSqlServer(
                Configuration.GetConnectionString("IESConn")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddIdentity<UsuarioApp, IdentityRole>().AddEntityFrameworkStores<IESContext>
+            services.AddIdentity<UsuarioApp, IdentityRole>().AddEntityFrameworkStores<ControleContext>
                 ().AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>

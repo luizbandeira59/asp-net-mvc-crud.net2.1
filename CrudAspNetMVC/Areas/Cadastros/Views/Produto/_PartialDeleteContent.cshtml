@@ -1,4 +1,4 @@
-﻿@model Modelo.Cadastros.Produto
+﻿@model Modelo.CadastrosBLL.Produto
 
 <div class="content">
 	<div class="row">
@@ -46,6 +46,28 @@
 					</span>
 				</div>
 				<input asp-for="Categoria.CatNome" class="form-control" disabled="disabled" />
+			</div>
+
+			<label asp-for="FormaPagamento.FormaNome" class="control-label hidden"></label>
+			<br />
+			<div class="input-group col-md-12">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-user-circle" aria-hidden="true"></i>
+					</span>
+				</div>
+				<input asp-for="FormaPagamento.FormaNome" class="form-control" disabled="disabled" />
+			</div>
+
+			<label asp-for="StatusCompra.StatusNome" class="control-label hidden"></label>
+			<br />
+			<div class="input-group col-md-12">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-user-circle" aria-hidden="true"></i>
+					</span>
+				</div>
+				<input asp-for="StatusCompra.StatusNome" class="form-control" disabled="disabled" />
 			</div>
 
 			<div class="form-group text-left h3">

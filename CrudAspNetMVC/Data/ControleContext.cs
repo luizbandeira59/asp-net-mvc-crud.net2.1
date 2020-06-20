@@ -1,12 +1,12 @@
 ﻿using CrudAspNetMVC.Models.Infra;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Modelo.Cadastros;
-using Modelo.Listas;
+using Modelo.CadastrosBLL;
+using Modelo.ListasBLL;
 
 namespace CrudAspNetMVC.Data
 {
-    public class IESContext : IdentityDbContext<UsuarioApp>
+    public class ControleContext : IdentityDbContext<UsuarioApp>
     {
 
         public DbSet<Categoria> Categorias { get; set; }
@@ -16,10 +16,11 @@ namespace CrudAspNetMVC.Data
         public DbSet<ListaDesejo> Desejos { get; set; }
         public DbSet<ListaMercado> Mercados { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-        
+        public DbSet<StatusCompra> Status { get; set; }
 
 
-        public IESContext(DbContextOptions<IESContext> options) : base(options)
+
+        public ControleContext(DbContextOptions<ControleContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,6 +40,22 @@ namespace CrudAspNetMVC.Data
                 .WithMany(cd => cd.PagamentoProdutos)
                 .HasForeignKey(d => d.FormaId);
 
+
+
+            modelBuilder.Entity<ProdutoStatus>()
+              .HasKey(cd => new { cd.ProdutoId, cd.StatusId });
+
+            modelBuilder.Entity<ProdutoStatus>()
+                .HasOne(c => c.Produto)
+                .WithMany(cd => cd.ProdutosStatuss)
+                .HasForeignKey(c => c.ProdutoId);
+
+            modelBuilder.Entity<ProdutoStatus>()
+                .HasOne(d => d.StatusCompra)
+                .WithMany(cd => cd.ProdutosStatuss)
+                .HasForeignKey(d => d.StatusId);
+
+
         }
 
         /*
@@ -52,7 +69,7 @@ namespace CrudAspNetMVC.Data
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=IESCrudMVC;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
         */
-       
+
     }
 }
 

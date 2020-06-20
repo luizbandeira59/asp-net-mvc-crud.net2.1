@@ -1,9 +1,9 @@
 ﻿using CrudAspNetMVC.Data;
-using CrudAspNetMVC.Data.DAL.Listas;
+using CrudAspNetMVC.Data.CamadaAcessoDados.Listas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Modelo.Listas;
+using Modelo.ListasBLL;
 using System.Threading.Tasks;
 
 
@@ -13,13 +13,13 @@ namespace CrudAspNetMVC.Areas.Listas.Controllers
     [Authorize]
     public class DesejoController : Controller
     {
-        private readonly IESContext _context;
-        private readonly DesejoDAL desejoDAL;
+        private readonly ControleContext _context;
+        private readonly DesejoServicos desejoDAL;
 
-        public DesejoController(IESContext context)
+        public DesejoController(ControleContext context)
         {
             _context = context;
-            desejoDAL = new DesejoDAL(context);
+            desejoDAL = new DesejoServicos(context);
         }
 
         public async Task<IActionResult> Index()

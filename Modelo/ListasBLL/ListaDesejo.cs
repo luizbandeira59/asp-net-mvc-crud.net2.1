@@ -1,11 +1,12 @@
-﻿using Modelo.Cadastros;
-using Modelo.Cadastros.Enums;
+﻿using Modelo.CadastrosBLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Modelo.Listas
+//BLL – Camada de Regra de negócios(Business Logic Layer)
+
+namespace Modelo.ListasBLL
 {
     public class ListaDesejo
     {
@@ -24,19 +25,23 @@ namespace Modelo.Listas
         public DateTime DesejoData { get; set; }
 
 
-        [Display(Name = "Situação da Compra")]//usar linq
-        public StatusCompra Status { get; set; }
+        [Display(Name = "Situação da Compra")]
+        [Required]
+        public StatusCompra StatusCompra { get; set; }
+        public long? StatusId { get; set; }
 
         [Display(Name = "Produto")]
         [Required]
         public Produto Produto { get; set; }
         public long? ProdutoId { get; set; }
 
-        [Display(Name = "Método de Pagamento")]//usar linq ou select list
+        [Display(Name = "Método de Pagamento")]
+        [Required]
         public FormaPagamento FormaPagamento { get; set; }
         public long? FormaId { get; set; }
 
-        [Display(Name = "Categoria")]//usar o select list do dropdown
+        [Display(Name = "Categoria")]
+        [Required]
         public Categoria Categoria { get; set; }
         public long? CategoriaId { get; set; }
     }
